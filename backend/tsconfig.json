@@ -1,18 +1,19 @@
 {
     "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
         "types": [
             "node",
             "jest"
         ],
-        "target": "ES6",
-        "module": "commonjs",
-        "rootDir": "./src",
-        "outDir": "./dist",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true
+        "rootDir": "./" // Set the rootDir to the root of the project
     },
     "include": [
-        "src"
+        "src/**/*",
+        "__tests__/**/*"
     ]
 }
