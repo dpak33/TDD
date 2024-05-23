@@ -1,7 +1,6 @@
 import request from 'supertest';
 import app from '../src/app';
 
-
 describe('Auth Routes', () => {
     describe('POST /auth/signup', () => {
         it('should create a new user', async () => {
@@ -9,6 +8,7 @@ describe('Auth Routes', () => {
                 .post('/auth/signup')
                 .send({
                     username: 'testuser',
+                    email: 'testuser@example.com',
                     password: 'testpassword'
                 });
 
@@ -21,6 +21,7 @@ describe('Auth Routes', () => {
                 .post('/auth/signup')
                 .send({
                     username: 'testuser',
+                    email: 'testuser@example.com',
                     password: 'testpassword'
                 });
 
@@ -28,6 +29,7 @@ describe('Auth Routes', () => {
                 .post('/auth/signup')
                 .send({
                     username: 'testuser',
+                    email: 'testuser@example.com',
                     password: 'testpassword'
                 });
 
@@ -42,6 +44,7 @@ describe('Auth Routes', () => {
                 .post('/auth/signup')
                 .send({
                     username: 'loginuser',
+                    email: 'loginuser@example.com',
                     password: 'loginpassword'
                 });
 

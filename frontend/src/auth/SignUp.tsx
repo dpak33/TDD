@@ -8,7 +8,7 @@ const SignUp: React.FC = () => {
 
     const handleSignUp = async () => {
         try {
-            await axios.post('http://localhost:5000/signup', { username, email, password });
+            await axios.post('http://localhost:8000/auth/signup', { username, email, password });
             console.log('User signed up successfully');
         } catch (error) {
             if (axios.isAxiosError(error)) {

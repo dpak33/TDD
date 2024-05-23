@@ -24,7 +24,7 @@ test('SignUp form submits successfully', async () => {
 
     // Wait for axios post to be called
     await waitFor(() => {
-        expect(mockedAxios.post).toHaveBeenCalledWith('http://localhost:5000/signup', {
+        expect(mockedAxios.post).toHaveBeenCalledWith('http://localhost:8000/auth/signup', {
             username: 'testuser',
             email: 'test@example.com',
             password: 'password123'

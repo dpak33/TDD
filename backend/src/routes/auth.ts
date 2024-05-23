@@ -8,7 +8,7 @@ const SECRET_KEY = 'your_jwt_secret_key';
 
 // Signup Route
 router.post('/signup', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
 
     if (findUserByUsername(username)) {
         return res.status(400).json({ message: 'User already exists' });
@@ -18,6 +18,7 @@ router.post('/signup', async (req, res) => {
     const newUser: User = {
         id: Date.now(), // simple id generation
         username,
+        email,
         password: hashedPassword
     };
 
