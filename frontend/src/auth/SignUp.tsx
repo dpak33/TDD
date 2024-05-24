@@ -5,8 +5,14 @@ const SignUp: React.FC = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleSignUp = async () => {
+        if (!username || !email || !password) {
+            setError('All fields are required');
+            return;
+        }
+
         try {
             await axios.post('http://localhost:8000/auth/signup', { username, email, password });
             console.log('User signed up successfully');
@@ -24,6 +30,7 @@ const SignUp: React.FC = () => {
     return (
         <div>
             <h2>Sign Up</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
