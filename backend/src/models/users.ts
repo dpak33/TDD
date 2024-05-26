@@ -1,16 +1,27 @@
-export interface User {
-    id: number;
+import mongoose, { Document, Schema } from 'mongoose';
+
+export interface IUser extends Document {
     username: string;
     email: string;
-    password: string; // hashed password
+    password: string;
 }
 
-let users: User[] = [];
+const UserSchema: Schema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+});
 
-export const addUser = (user: User) => {
-    users.push(user);
-};
-
-export const findUserByUsername = (username: string): User | undefined => {
-    return users.find(user => user.username === username);
-};
+const User = mongoose.model<IUser>('User', UserSchema);
+export default User;
