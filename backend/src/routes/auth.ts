@@ -29,13 +29,8 @@ router.post('/signup', async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: 'User created successfully' });
     } catch (err) {
-        if (err instanceof Error) {
-            console.error(err.message);
-            res.status(500).send('Server error');
-        } else {
-            console.error('Unexpected error', err);
-            res.status(500).send('Server error');
-        }
+        console.error(err instanceof Error ? err.message : 'Unexpected error', err);
+        res.status(500).send('Server error');
     }
 });
 
@@ -52,13 +47,8 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
         res.json({ token });
     } catch (err) {
-        if (err instanceof Error) {
-            console.error(err.message);
-            res.status(500).send('Server error');
-        } else {
-            console.error('Unexpected error', err);
-            res.status(500).send('Server error');
-        }
+        console.error(err instanceof Error ? err.message : 'Unexpected error', err);
+        res.status(500).send('Server error');
     }
 });
 

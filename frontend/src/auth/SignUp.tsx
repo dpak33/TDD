@@ -20,9 +20,11 @@ const SignUp: React.FC = () => {
             if (axios.isAxiosError(error)) {
                 // Axios error
                 console.error('Sign up error:', error.response?.data?.message);
+                setError(error.response?.data?.message || 'Sign up failed');
             } else {
                 // Non-Axios error
                 console.error('An unexpected error occurred:', error);
+                setError('An unexpected error occurred');
             }
         }
     };
@@ -31,9 +33,24 @@ const SignUp: React.FC = () => {
         <div>
             <h2>Sign Up</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+            <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+            />
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+            />
             <button onClick={handleSignUp}>Sign Up</button>
         </div>
     );
