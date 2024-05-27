@@ -1,7 +1,19 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../src/app';
+import User from '../src/models/users';
 
 describe('Auth Routes', () => {
+    beforeEach(async () => {
+        // Clear the database before each test
+        await User.deleteMany({});
+    });
+
+    afterAll(async () => {
+        // Close the database connection after all tests
+        await mongoose.connection.close();
+    });
+
     describe('POST /auth/signup', () => {
         it('should create a new user', async () => {
             const response = await request(app)
