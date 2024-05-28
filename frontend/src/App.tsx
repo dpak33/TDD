@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUp from './auth/SignUp';
 import Login from './auth/Login';
-
+import JobSearchForm from './jobsearch/JobSearchForm';
 
 const App: React.FC = () => {
   return (
@@ -9,6 +9,7 @@ const App: React.FC = () => {
       <h1>Chat App</h1>
       <SignUp />
       <Login />
+      <JobSearchForm />
     </div>
   );
 };
