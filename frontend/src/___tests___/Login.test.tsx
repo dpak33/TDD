@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { MemoryRouter } from 'react-router-dom';
 import Login from '../auth/Login'; // Adjust the path to your Login component
 import axios from 'axios';
 
@@ -11,17 +12,28 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe('Login Component', () => {
     const mockOnLogin = jest.fn();
 
+    beforeEach(() => {
+        mockOnLogin.mockClear();
+        mockedAxios.post.mockClear();
+    });
+
     test('Login form submits successfully', async () => {
         mockedAxios.post.mockResolvedValueOnce({ data: { token: 'fake-token' } });
 
-        render(<Login onLogin={mockOnLogin} />);
+        render(
+            <MemoryRouter>
+                <Login onLogin={mockOnLogin} />
+            </MemoryRouter>
+        );
 
         // Fill out and submit the form
         fireEvent.change(screen.getByPlaceholderText(/Email/i), { target: { value: 'testuser' } });
         fireEvent.change(screen.getByPlaceholderText(/Password/i), { target: { value: 'password123' } });
 
         // Use getByRole to get the button
-        fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
+        });
 
         // Wait for axios post to be called
         await waitFor(() => {
@@ -36,7 +48,11 @@ describe('Login Component', () => {
     });
 
     test('Prevents form submission with empty fields', async () => {
-        render(<Login onLogin={mockOnLogin} />);
+        render(
+            <MemoryRouter>
+                <Login onLogin={mockOnLogin} />
+            </MemoryRouter>
+        );
 
         // Submit the form without filling out fields
         fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
@@ -50,7 +66,11 @@ describe('Login Component', () => {
     });
 
     test('Updates state correctly on input change', () => {
-        render(<Login onLogin={mockOnLogin} />);
+        render(
+            <MemoryRouter>
+                <Login onLogin={mockOnLogin} />
+            </MemoryRouter>
+        );
 
         const usernameInput = screen.getByPlaceholderText(/Email/i);
         const passwordInput = screen.getByPlaceholderText(/Password/i);
