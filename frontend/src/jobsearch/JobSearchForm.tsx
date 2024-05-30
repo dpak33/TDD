@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import axios from 'axios';
 
 interface Job {
@@ -6,33 +6,40 @@ interface Job {
     company: string;
     location: string;
     summary: string;
+    salary: string;
 }
 
 const JobSearchForm: React.FC = () => {
-    const [query, setQuery] = useState('');
-    const [location, setLocation] = useState('');
-    const [error, setError] = useState('');
+    const [query, setQuery] = useState<string>('');
+    const [location, setLocation] = useState<string>('');
+    const [error, setError] = useState<string>('');
     const [jobs, setJobs] = useState<Job[]>([]);
 
-    const handleSubmit = async (event: React.FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        // Reset error state
         setError('');
 
-        // Validate inputs
-        if (!query || !location) {
-            setError('Please enter both a job title and a location.');
+        if (!query) {
+            setError('Please enter a job title.');
             return;
         }
 
-        // Simulate API call
         try {
-            // Replace this with your actual API endpoint
-            const response = await axios.get('/api/dummy-jobs', { params: { query, location } });
+            const response = await axios.get<Job[]>('http://localhost:8000/api/jobs', {
+                params: { query, location },
+            });
             setJobs(response.data);
         } catch (err) {
             setError('Failed to fetch job listings. Please try again.');
         }
+    };
+
+    const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value);
+    };
+
+    const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setLocation(e.target.value);
     };
 
     return (
@@ -44,7 +51,7 @@ const JobSearchForm: React.FC = () => {
                         type="text"
                         id="query"
                         value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        onChange={handleQueryChange}
                     />
                 </div>
                 <div>
@@ -53,7 +60,7 @@ const JobSearchForm: React.FC = () => {
                         type="text"
                         id="location"
                         value={location}
-                        onChange={(e) => setLocation(e.target.value)}
+                        onChange={handleLocationChange}
                     />
                 </div>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -68,6 +75,7 @@ const JobSearchForm: React.FC = () => {
                             <p>{job.company}</p>
                             <p>{job.location}</p>
                             <p>{job.summary}</p>
+                            <p>{job.salary}</p>
                         </li>
                     ))}
                 </ul>

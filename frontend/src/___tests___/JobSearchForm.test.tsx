@@ -15,8 +15,8 @@ describe('JobSearchForm Component', () => {
 
     test('Job search form submits successfully', async () => {
         const jobs = [
-            { title: 'Software Engineer', company: 'Tech Inc.', location: 'New York', summary: 'Developing software' },
-            { title: 'Data Scientist', company: 'Data Co.', location: 'San Francisco', summary: 'Analyzing data' },
+            { title: 'Software Engineer', company: 'Tech Inc.', location: 'New York', summary: 'Developing software', salary: '$100,000' },
+            { title: 'Data Scientist', company: 'Data Co.', location: 'San Francisco', summary: 'Analyzing data', salary: '$120,000' },
         ];
 
         mockedAxios.get.mockResolvedValueOnce({ data: jobs });
@@ -34,7 +34,7 @@ describe('JobSearchForm Component', () => {
 
         // Wait for axios get to be called
         await waitFor(() => {
-            expect(mockedAxios.get).toHaveBeenCalledWith('/api/dummy-jobs', {
+            expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8000/api/jobs', {
                 params: { query: 'Engineer', location: 'New York' }
             });
         });
@@ -59,7 +59,7 @@ describe('JobSearchForm Component', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByText('Please enter both a job title and a location.')).toBeInTheDocument();
+            expect(screen.getByText('Please enter a job title.')).toBeInTheDocument();
         });
 
         expect(mockedAxios.get).not.toHaveBeenCalled();
