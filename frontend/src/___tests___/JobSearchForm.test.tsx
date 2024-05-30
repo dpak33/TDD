@@ -34,7 +34,7 @@ describe('JobSearchForm Component', () => {
 
         // Wait for axios get to be called
         await waitFor(() => {
-            expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8000/api/jobs', {
+            expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:5000/api/jobs', {
                 params: { query: 'Engineer', location: 'New York' }
             });
         });
