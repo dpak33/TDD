@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import SignUp from './auth/SignUp';
 import Login from './auth/Login';
 import JobSearchForm from './jobsearch/JobSearchForm';
+import SavedJobs from './jobsearch/SavedJobs';
 import PrivateRoute from './components/PrivateRoute';
 
 const App: React.FC = () => {
@@ -24,6 +25,14 @@ const App: React.FC = () => {
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
                 <JobSearchForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/savedjobs"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <SavedJobs />
               </PrivateRoute>
             }
           />
