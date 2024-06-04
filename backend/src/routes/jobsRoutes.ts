@@ -3,6 +3,13 @@ import Job from '../models/jobs';
 
 const router: Router = Router();
 
+router.options('/save-job', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.send();
+});
+
 // Save a job
 router.post('/save-job', async (req, res) => {
     const jobData = req.body;
@@ -12,7 +19,7 @@ router.post('/save-job', async (req, res) => {
         company: jobData.company,
         location: jobData.location,
         summary: jobData.summary,
-        salary: jobData.salary
+        salary: jobData.salary,
     });
 
     try {

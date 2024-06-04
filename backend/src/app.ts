@@ -3,17 +3,27 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from '../db';
 import authRoutes from './routes/auth';
-import jobRoutes from './routes/jobsRoutes';
+import jobsRoutes from './routes/jobsRoutes';
 
 const app = express();
 
 // Connect to MongoDB
 connectDB();
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+    origin: 'http://localhost:3000', // Your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
+
 app.use(bodyParser.json());
 app.use('/auth', authRoutes);
-app.use('/jobs', jobRoutes);
+app.use('/jobs', jobsRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
