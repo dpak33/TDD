@@ -1,13 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import axios from 'axios';
-
-interface Job {
-    title: string;
-    company: string;
-    location: string;
-    summary: string;
-    salary: string;
-}
+import { saveJob } from '../utils/saveJob';
+import { Job } from '../types';
 
 const JobSearchForm: React.FC = () => {
     const [query, setQuery] = useState<string>('');
@@ -76,6 +70,7 @@ const JobSearchForm: React.FC = () => {
                             <p>{job.location}</p>
                             <p>{job.summary}</p>
                             <p>{job.salary}</p>
+                            <button onClick={() => saveJob(job)}>Save Job</button>
                         </li>
                     ))}
                 </ul>
