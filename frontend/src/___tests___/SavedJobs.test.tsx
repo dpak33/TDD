@@ -2,7 +2,7 @@ import { render, screen, waitFor, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
 import SavedJobs from '../jobsearch/SavedJobs';
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -22,9 +22,9 @@ describe('SavedJobs Component', () => {
 
         await act(async () => {
             render(
-                <Router>
+                <MemoryRouter>
                     <SavedJobs />
-                </Router>
+                </MemoryRouter>
             );
         });
 
@@ -49,9 +49,9 @@ describe('SavedJobs Component', () => {
 
         await act(async () => {
             render(
-                <Router>
+                <MemoryRouter>
                     <SavedJobs />
-                </Router>
+                </MemoryRouter>
             );
         });
 
@@ -65,9 +65,9 @@ describe('SavedJobs Component', () => {
 
         await act(async () => {
             render(
-                <Router>
+                <MemoryRouter>
                     <SavedJobs />
-                </Router>
+                </MemoryRouter>
             );
         });
 
@@ -76,4 +76,25 @@ describe('SavedJobs Component', () => {
         });
     });
 
+    test('navigates to job search page when arrow is clicked', async () => {
+        const { container } = render(
+            <MemoryRouter initialEntries={['/savedjobs']}>
+                <Routes>
+                    <Route path="/savedjobs" element={<SavedJobs />} />
+                    <Route path="/jobsearch" element={<div>Job Search Page</div>} />
+                </Routes>
+            </MemoryRouter>
+        );
+
+        const arrow = container.querySelector('span');
+        expect(arrow).toBeInTheDocument();
+
+        await act(async () => {
+            if (arrow) {
+                fireEvent.click(arrow);
+            }
+        });
+
+        expect(screen.getByText('Job Search Page')).toBeInTheDocument();
+    });
 });
