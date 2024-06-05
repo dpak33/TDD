@@ -1,10 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Toggle.css';
 
 const Toggle: React.FC = () => {
     const navigate = useNavigate();
-    const currentPath = window.location.pathname;
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const handleClick = () => {
         if (currentPath === '/jobsearch') {
@@ -33,7 +34,12 @@ const Toggle: React.FC = () => {
     };
 
     return (
-        <div className="toggle-container" onClick={handleClick}>
+        <div
+            className="toggle-container"
+            onClick={handleClick}
+            role="button"
+            aria-label="toggle navigation"
+        >
             <span>↩</span>
             <h3>{getToggleText()}</h3>
         </div>
