@@ -5,6 +5,7 @@ import { Job } from '../types';
 const SavedJobs: React.FC = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchSavedJobs = async () => {
@@ -13,6 +14,8 @@ const SavedJobs: React.FC = () => {
                 setJobs(response.data);
             } catch (err) {
                 setError('Failed to fetch saved jobs. Please try again.');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -21,8 +24,11 @@ const SavedJobs: React.FC = () => {
 
     return (
         <div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {jobs.length > 0 ? (
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p style={{ color: 'red' }}>{error}</p>
+            ) : jobs.length > 0 ? (
                 <ul>
                     {jobs.map((job, index) => (
                         <li key={index}>

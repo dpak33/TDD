@@ -12,6 +12,26 @@ describe('SavedJobs Component', () => {
         mockedAxios.get.mockClear();
     });
 
+    test('renders without crashing', async () => {
+        mockedAxios.get.mockResolvedValueOnce({ data: [] });
+
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <SavedJobs />
+                </MemoryRouter>
+            );
+        });
+
+        // Wait for the loading indicator to disappear
+        await waitFor(() => {
+            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        });
+
+        // Check for the "No saved jobs found." message
+        expect(screen.getByText('No saved jobs found.')).toBeInTheDocument();
+    });
+
     test('fetches and displays saved jobs', async () => {
         const jobs = [
             { title: 'Software Engineer', company: 'Tech Inc.', location: 'New York', summary: 'Developing software', salary: '$100,000' },
@@ -76,5 +96,14 @@ describe('SavedJobs Component', () => {
         });
     });
 
+    test('displays a loading state initially', () => {
+        render(
+            <MemoryRouter>
+                <SavedJobs />
+            </MemoryRouter>
+        );
 
+
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
 });
