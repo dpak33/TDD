@@ -4,8 +4,7 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Arial, sans-serif;
-  /* Default font */
+  font-family: "Bodoni Moda", serif;
   color: black;
   background-color: white;
   display: flex;
@@ -17,7 +16,7 @@ body,
 
 /* Set specific styles for h1 elements */
 h1 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Bodoni Moda", serif;
   /* Example font */
   font-size: 2.5em;
   margin-bottom: 0.5em;
