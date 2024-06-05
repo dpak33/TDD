@@ -1,4 +1,3 @@
-/* Apply these styles to the root element */
 body,
 #root {
   margin: 0;
@@ -69,18 +68,4 @@ li {
   padding: 2em;
   text-align: center;
   position: relative;
-}
-
-/* Toggle button container */
-.toggle-container {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.toggle-container span {
-  margin-right: 8px;
 }
