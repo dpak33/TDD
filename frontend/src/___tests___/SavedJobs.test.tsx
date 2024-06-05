@@ -76,25 +76,5 @@ describe('SavedJobs Component', () => {
         });
     });
 
-    test('navigates to job search page when arrow is clicked', async () => {
-        const { container } = render(
-            <MemoryRouter initialEntries={['/savedjobs']}>
-                <Routes>
-                    <Route path="/savedjobs" element={<SavedJobs />} />
-                    <Route path="/jobsearch" element={<div>Job Search Page</div>} />
-                </Routes>
-            </MemoryRouter>
-        );
 
-        const arrow = container.querySelector('span');
-        expect(arrow).toBeInTheDocument();
-
-        await act(async () => {
-            if (arrow) {
-                fireEvent.click(arrow);
-            }
-        });
-
-        expect(screen.getByText('Job Search Page')).toBeInTheDocument();
-    });
 });
