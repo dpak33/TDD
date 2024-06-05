@@ -1,38 +1,73 @@
-.App {
+/* Apply these styles to the root element */
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  /* Default font */
+  color: black;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  /* Center text */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Set specific styles for h1 elements */
+h1 {
+  font-family: 'Helvetica', sans-serif;
+  /* Example font */
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Other global styles */
+* {
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Ensure that form elements are centered */
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1em;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style buttons */
+button {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Input fields */
+input {
+  padding: 0.5em;
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+/* Container for the entire app */
+#root>div {
+  width: 100%;
+  max-width: 800px;
+  padding: 2em;
 }
