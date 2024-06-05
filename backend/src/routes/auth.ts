@@ -1,8 +1,9 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User, { IUser } from '../models/users';
+import User from '../models/users';
 import dotenv from 'dotenv';
+import validateFields from '../middleware/validateFields';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const router = express.Router();
 const SECRET_KEY = process.env.JWT_SECRET as string;
 
 // Signup Route
-router.post('/signup', async (req, res) => {
+router.post('/signup', validateFields(['username', 'email', 'password']), async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
@@ -35,7 +36,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login Route
-router.post('/login', async (req, res) => {
+router.post('/login', validateFields(['username', 'password']), async (req, res) => {
     const { username, password } = req.body;
 
     try {

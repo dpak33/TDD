@@ -48,6 +48,35 @@ describe('Auth Routes', () => {
             expect(response.status).toBe(400);
             expect(response.body.message).toBe('User already exists');
         });
+
+        it('should return 400 if fields are missing', async () => {
+            const response = await request(app)
+                .post('/auth/signup')
+                .send({
+                    username: 'testuser',
+                    password: 'testpassword'
+                });
+
+            expect(response.status).toBe(400);
+            expect(response.body.message).toBe('Email is required');
+        });
+
+        it('should return 500 for server error', async () => {
+            jest.spyOn(User.prototype, 'save').mockImplementationOnce(() => {
+                throw new Error('Server error');
+            });
+
+            const response = await request(app)
+                .post('/auth/signup')
+                .send({
+                    username: 'testuser',
+                    email: 'testuser@example.com',
+                    password: 'testpassword'
+                });
+
+            expect(response.status).toBe(500);
+            expect(response.text).toBe('Server error');
+        });
     });
 
     describe('POST /auth/login', () => {
@@ -81,6 +110,44 @@ describe('Auth Routes', () => {
 
             expect(response.status).toBe(400);
             expect(response.body.message).toBe('Invalid username or password');
+        });
+
+        it('should return 400 if username is missing', async () => {
+            const response = await request(app)
+                .post('/auth/login')
+                .send({
+                    password: 'loginpassword'
+                });
+
+            expect(response.status).toBe(400);
+            expect(response.body.message).toBe('Username is required');
+        });
+
+        it('should return 400 if password is missing', async () => {
+            const response = await request(app)
+                .post('/auth/login')
+                .send({
+                    username: 'loginuser'
+                });
+
+            expect(response.status).toBe(400);
+            expect(response.body.message).toBe('Password is required');
+        });
+
+        it('should return 500 for server error', async () => {
+            jest.spyOn(User, 'findOne').mockImplementationOnce(() => {
+                throw new Error('Server error');
+            });
+
+            const response = await request(app)
+                .post('/auth/login')
+                .send({
+                    username: 'loginuser',
+                    password: 'loginpassword'
+                });
+
+            expect(response.status).toBe(500);
+            expect(response.text).toBe('Server error');
         });
     });
 });
