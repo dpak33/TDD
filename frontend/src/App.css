@@ -11,13 +11,11 @@ body,
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* Center text */
 }
 
 /* Set specific styles for h1 elements */
 h1 {
   font-family: "Bodoni Moda", serif;
-  /* Example font */
   font-size: 2.5em;
   margin-bottom: 0.5em;
 }
@@ -69,4 +67,20 @@ li {
   width: 100%;
   max-width: 800px;
   padding: 2em;
+  text-align: center;
+  position: relative;
+}
+
+/* Toggle button container */
+.toggle-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-container span {
+  margin-right: 8px;
 }

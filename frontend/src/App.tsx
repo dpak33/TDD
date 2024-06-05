@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import SignUp from './auth/SignUp';
 import Login from './auth/Login';
 import JobSearchForm from './jobsearch/JobSearchForm';
@@ -18,6 +18,7 @@ const App: React.FC = () => {
     <Router>
       <div>
         <h1>Job Search App</h1>
+        <Toggle />
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
@@ -41,6 +42,23 @@ const App: React.FC = () => {
         </Routes>
       </div>
     </Router>
+  );
+};
+
+const Toggle: React.FC = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="toggle-container" onClick={() => {
+      if (window.location.pathname === '/jobsearch') {
+        navigate('/savedjobs');
+      } else {
+        navigate('/jobsearch');
+      }
+    }}>
+      <span>↩</span>
+      <h3>{window.location.pathname === '/jobsearch' ? 'To Saved Jobs' : 'To Job Search'}</h3>
+    </div>
   );
 };
 

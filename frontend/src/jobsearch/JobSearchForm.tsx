@@ -2,14 +2,12 @@ import React, { useState, FormEvent, ChangeEvent } from 'react';
 import axios from 'axios';
 import { saveJob } from '../utils/saveJob';
 import { Job } from '../types';
-import { useNavigate } from 'react-router-dom';
 
 const JobSearchForm: React.FC = () => {
     const [query, setQuery] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [jobs, setJobs] = useState<Job[]>([]);
-    const navigate = useNavigate();
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -40,15 +38,6 @@ const JobSearchForm: React.FC = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div
-                    onClick={() => navigate('/savedjobs')}
-                    style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-                >
-                    <h3 style={{ marginRight: '8px' }}>To saved jobs</h3>
-                    <span>➜</span>
-                </div>
-            </div>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="query">Job Title:</label>
