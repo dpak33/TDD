@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project began as a practice exercise for Test-Driven Development (TDD) and for coding with React and TypeScript together. Over time, it developed into a more complete application that can be used for simple job searches. The app is built using the MERN stack (MongoDB, Express, React, Node.js) with an integrated web scraper - see bottom of README for details of webscraper directory. The web scraper fetches job listings from RemoteOK and serves them as an API endpoint. The frontend allows users to search for jobs, save them, and view saved jobs.
+This project began as a practice exercise for Test-Driven Development (TDD) and for coding with React and TypeScript together. Over time, it developed into a more complete application that can be used for simple job searches. The app is built using the MERN stack (MongoDB, Express, React, Node.js) with an integrated web scraper - see bottom of README for details of webscraper directory and find installation instructions in other directory. Please note that webscraper must be up and running before you try to interact with its API endpoint here. The web scraper fetches job listings from RemoteOK and serves them as an API endpoint. The frontend allows users to search for jobs, save them, and view saved jobs.
 
 ## Table of Contents
 
@@ -37,8 +37,8 @@ This project began as a practice exercise for Test-Driven Development (TDD) and 
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/job-search-app.git
-    cd job-search-app
+    git clone https://github.com/dpak33/TDD.git
+    cd TDD
     ```
 
 2. Install backend dependencies:
@@ -53,11 +53,6 @@ This project began as a practice exercise for Test-Driven Development (TDD) and 
     npm install
     ```
 
-4. Install web scraper dependencies:
-    ```sh
-    cd ../webscraper
-    pip install -r requirements.txt
-    ```
 
 ### Environment Variables
 
@@ -85,7 +80,7 @@ To run the web scraper API server:
     flask run
     ```
 
-The web scraper will be available at `http://127.0.0.1:5000/api/jobs`. It accepts two query parameters: `query` (e.g., 'developer') and `location` (e.g., 'Vancouver').
+The web scraper will be available at `http://127.0.0.1:5000/api/jobs`, which is the call made within the job search component of this app. It accepts two query parameters: `query` (e.g., 'developer') and `location` (e.g., 'Vancouver').
 
 ## MERN Stack App
 
@@ -124,13 +119,12 @@ The MERN stack app consists of the frontend (React) and the backend (Express wit
 
 ### Job Routes
 
-- `GET /jobs`: Get job listings from the database
 - `POST /jobs/save-job`: Save a job to the database
 - `GET /jobs/saved-jobs`: Get saved jobs from the database
 
 ### Web Scraper API
 
-- `GET /api/jobs`: Fetch jobs from RemoteOK using the web scraper
+- `GET http://127.0.0.1:5000/api/jobs`: Fetch jobs from RemoteOK using the web scraper. 
 
 ## Usage
 
