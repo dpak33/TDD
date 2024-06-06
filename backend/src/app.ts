@@ -12,7 +12,7 @@ connectDB();
 
 // CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:3000', // Your frontend URL
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
