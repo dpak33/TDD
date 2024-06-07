@@ -1,5 +1,7 @@
 # Job Search App
 
+**Please read all, particularly testing information.**
+
 ## Overview
 
 This project began as a practice exercise for Test-Driven Development (TDD) and for coding with React and TypeScript together. Over time, it developed into a more complete application that can be used for simple job searches. The app is built using the MERN stack (MongoDB, Express, React, Node.js) with an integrated web scraper - see bottom of README for details of webscraper directory and find installation instructions in other directory. Please note that webscraper must be up and running before you try to interact with its API endpoint here. The web scraper fetches job listings from RemoteOK and serves them as an API endpoint. The frontend allows users to search for jobs, save them, and view saved jobs.
@@ -137,6 +139,10 @@ The MERN stack app consists of the frontend (React) and the backend (Express wit
 7. View your saved jobs.
 
 ## Testing
+
+IMPORTANT: The test files operate on the same development database used to store users and their associated information. As a result, deletion operations within the test suites will reset the database to a clean slate. This means that all user data will be erased, and users will need to sign up again to access the app.
+
+If sign-in no longer works after running the test suite, this is due to the database reset and not an error with the app. Please bear this in mind when running tests.
 
 ### Backend Tests
 
