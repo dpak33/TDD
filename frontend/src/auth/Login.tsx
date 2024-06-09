@@ -18,7 +18,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/auth/login', { username, password });
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, { username, password });
             console.log('User signed in successfully:', response.data.token);
             onLogin();
             navigate('/jobsearch');

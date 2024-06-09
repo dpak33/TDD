@@ -10,7 +10,7 @@ const SavedJobs: React.FC = () => {
     useEffect(() => {
         const fetchSavedJobs = async () => {
             try {
-                const response = await axios.get<Job[]>('http://localhost:8000/jobs/saved-jobs');
+                const response = await axios.get<Job[]>(`${process.env.REACT_APP_BACKEND_URL}/jobs/saved-jobs`);
                 setJobs(response.data);
             } catch (err) {
                 setError('Failed to fetch saved jobs. Please try again.');

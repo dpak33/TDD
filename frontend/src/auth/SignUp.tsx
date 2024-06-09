@@ -14,7 +14,7 @@ const SignUp: React.FC = () => {
         }
 
         try {
-            await axios.post('http://localhost:8000/auth/signup', { username, email, password });
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/signup`, { username, email, password });
             console.log('User signed up successfully');
         } catch (error) {
             if (axios.isAxiosError(error)) {
