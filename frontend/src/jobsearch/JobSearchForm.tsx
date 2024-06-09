@@ -19,7 +19,7 @@ const JobSearchForm: React.FC = () => {
         }
 
         try {
-            const response = await axios.get<Job[]>(`${process.env.REACT_APP_BACKEND_URL}/api/jobs`, {
+            const response = await axios.get<Job[]>('http://127.0.0.1:5000/api/jobs', {
                 params: { query, location },
             });
             setJobs(response.data);
